@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "FoioNBRgPf2zyuxrW8AguLUEQB6N1Gb2sjCGsMi6ytk=",
+  "Source": "CourseManagementSystem",
+  "BasePath": "_content/CourseManagementSystem",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "CourseManagementSystem\\wwwroot",
+      "Source": "CourseManagementSystem",
+      "ContentRoot": "D:\\TECHNO-LAB\\2. MASTER 1\\ASP NET\\PROJET_EXAM\\CourseManagementSystem\\wwwroot\\",
+      "BasePath": "_content/CourseManagementSystem",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
