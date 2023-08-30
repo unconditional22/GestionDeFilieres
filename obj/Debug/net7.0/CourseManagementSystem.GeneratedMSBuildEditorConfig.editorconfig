@@ -9,17 +9,17 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CourseManagementSystem
 build_property.RootNamespace = CourseManagementSystem
-build_property.ProjectDir = D:\TECHNO-LAB\2. MASTER 1\ASP NET\PROJET_EXAM\CourseManagementSystem\
+build_property.ProjectDir = d:\TECHNO-LAB\2. MASTER 1\ASP NET\PROJET_EXAM\CourseManagementSystem\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\TECHNO-LAB\2. MASTER 1\ASP NET\PROJET_EXAM\CourseManagementSystem
+build_property.MSBuildProjectDirectory = d:\TECHNO-LAB\2. MASTER 1\ASP NET\PROJET_EXAM\CourseManagementSystem
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/TECHNO-LAB/2. MASTER 1/ASP NET/PROJET_EXAM/CourseManagementSystem/Views/Account/Login.cshtml]
+[d:/TECHNO-LAB/2. MASTER 1/ASP NET/PROJET_EXAM/CourseManagementSystem/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/TECHNO-LAB/2. MASTER 1/ASP NET/PROJET_EXAM/CourseManagementSystem/Views/Home/Index.cshtml]
+[d:/TECHNO-LAB/2. MASTER 1/ASP NET/PROJET_EXAM/CourseManagementSystem/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

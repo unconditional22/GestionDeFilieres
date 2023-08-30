@@ -1,16 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using ALoginViewModel.Models.ViewModels; 
+using Microsoft.Extensions.Logging; // Add this namespace
+
+using ALoginViewModel.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AccountController.Controllers
 {
     public class AccountController : Controller
     {
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<AccountController> _logger; // Add this field
 
-        public AccountController(SignInManager<IdentityUser> signInManager)
+        public AccountController(SignInManager<IdentityUser> signInManager, ILogger<AccountController> logger) // Add ILogger parameter
         {
             _signInManager = signInManager;
+            _logger = logger; // Initialize the logger
         }
 
         [HttpGet]
@@ -21,22 +26,20 @@ namespace AccountController.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             if (ModelState.IsValid)
-            { 
-                if (model.UserName != null && model.Password != null) // Verifie pour valeur null 
-                { // verifie que PasswordSignInAsync method recoit les valeurs non-null.
+            {
+                if (model.UserName != null && model.Password != null) // Add null checks here
+                {
                     var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
-                        // Rediriger vers home ou un un resource proteger si le login a reussi.
-                        return RedirectToAction("Index", "Home");
+                        _logger.LogInformation("User logged in.");
+                        return RedirectToAction(nameof(HomeController.Index), "Home");
                     }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    }
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                 }
                 else
                 {
@@ -45,5 +48,6 @@ namespace AccountController.Controllers
             }
             return View(model);
         }
+
     }
 }
