@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging; // Add this namespace
-
 using ALoginViewModel.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace AccountController.Controllers
 {
@@ -12,10 +12,10 @@ namespace AccountController.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<AccountController> _logger; // Add this field
 
-        public AccountController(SignInManager<IdentityUser> signInManager, ILogger<AccountController> logger) // Add ILogger parameter
+        public AccountController(SignInManager<IdentityUser> signInManager, ILogger<AccountController> logger)
         {
             _signInManager = signInManager;
-            _logger = logger; // Initialize the logger
+            _logger = logger;
         }
 
         [HttpGet]
@@ -31,15 +31,26 @@ namespace AccountController.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.UserName != null && model.Password != null) // Add null checks here
+                if (!string.IsNullOrWhiteSpace(model.UserName) && !string.IsNullOrWhiteSpace(model.Password))
                 {
-                    var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
-                    if (result.Succeeded)
+                    IdentityUser? user = await _signInManager.UserManager.FindByNameAsync(model.UserName);
+                    if (user != null)
                     {
-                        _logger.LogInformation("User logged in.");
-                        return RedirectToAction(nameof(HomeController.Index), "Home");
+                        var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: false);
+                        if (result.Succeeded)
+                        {
+                            _logger.LogInformation("User logged in.");
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        }
                     }
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "User not found."); // Handle the case when the user is not found.
+                    }
                 }
                 else
                 {
