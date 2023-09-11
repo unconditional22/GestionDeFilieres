@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\TECHNO-LAB\\2. MASTER 1\\ASP NET\\PROJET_EXAM\\CourseManagementSystem\\wwwroot\\css\\login.css",
+      "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
+      "Id": "D:\\TECHNO-LAB\\2. MASTER 1\\ASP NET\\PROJET_EXAM\\CourseManagementSystem\\wwwroot\\css\\login2.css",
+      "PackagePath": "staticwebassets\\css\\login2.css"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.CourseManagementSystem.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.CourseManagementSystem.props",
+      "PackagePath": "build\\CourseManagementSystem.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.CourseManagementSystem.props",
+      "PackagePath": "buildMultiTargeting\\CourseManagementSystem.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.CourseManagementSystem.props",
+      "PackagePath": "buildTransitive\\CourseManagementSystem.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

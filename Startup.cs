@@ -49,8 +49,11 @@ namespace CourseManagementSystem
                 options.AccessDeniedPath = "/Account/AccessDenied"; // Customize your access denied route
             });
 
+            services.AddScoped<ICourseRepository, CourseRepository>(); // Register your ICourseRepository here
+
             services.AddRazorPages();
         }
+
 
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
