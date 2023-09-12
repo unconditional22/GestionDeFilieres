@@ -1,9 +1,9 @@
 @model IEnumerable<CourseManagement.Models.Course>
 
-<h2>Course Index</h2>
+<h2>Filières - Index</h2>
 
 <p>
-    <a asp-action="Create">Create New Course</a>
+    <a href="@Url.Action("Create")">Creer Nouvelle Filière</a>
 </p>
 
 <table class="table">
@@ -35,9 +35,9 @@
                     @Html.DisplayFor(modelItem => item.StatusC)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Détails</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
                 </td>
             </tr>
         }

@@ -14,35 +14,35 @@ namespace CourseManagementSystem.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            // Initialize DbSet properties using AddRange
+            //Initialize DbSet properties using AddRange
 
-            // Initialize Courses using AddRange
-            // if (Courses != null)
-            // {
-            //     Courses.AddRange(new Course[]
-            //     {
-            //         new Course { Title = "Introduction to Programming", Description = "Learn the basics of programming with C#", StatusC = "Open" },
-            //         new Course { Title = "Web Development with ASP.NET Core", Description = "Build web applications with ASP.NET Core", StatusC = "Open" }
-            //     });
-            // }
+            //Initialize Courses using AddRange
+            if (Courses != null)
+            {
+                Courses.AddRange(new Course[]
+                {
+                    new Course { Title = "Genie Logiciel", Description = "Developement & Technologie Web", StatusC = "Ouvert" },
+                    new Course { Title = "Business", Description = "Marketing Digital", StatusC = "Fermer" }
+                });
+            }
 
-            // // Initialize Students using AddRange
-            // if (Students != null)
-            // {
-            //     Students.AddRange(new Student[]
-            //     {
-            //         new Student { FirstName = "", LastName = "" },
-            //         new Student { FirstName = "", LastName = "" }
-            //     });
-            // }
+            // Initialize Students using AddRange
+            if (Students != null)
+            {
+                Students.AddRange(new Student[]
+                {
+                    new Student { FirstName = "John", LastName = "Doe" },
+                    new Student { FirstName = "Jane", LastName = "Smith" }
+                });
+            }
 
             // Initialize Enrollments using AddRange
             // if (Enrollments != null)
             // {
             //     Enrollments.AddRange(new Enrollment[]
             //     {
-            //         new Enrollment { StudentId = 0 , CourseId = 0, EnrollmentDate = 08/02/2023 },
-            //         new Enrollment { StudentId = 0 , CourseId = 0, EnrollmentDate = 08/02/2023 }
+            //         new Enrollment { StudentId = 1, CourseId = 1, EnrollmentDate = new DateTime(2023, 08, 12) },
+            //         new Enrollment { StudentId = 2, CourseId = 2, EnrollmentDate = new DateTime(2023, 08, 12) }
             //     });
             // }
 

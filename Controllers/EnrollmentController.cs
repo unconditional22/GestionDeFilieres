@@ -8,6 +8,13 @@ namespace EnrollmentManagement.Controllers
 {
     public class EnrollmentController : Controller
     {
+        private readonly IEnrollmentRepository _enrollmentRepository;
+
+        public EnrollmentController(IEnrollmentRepository enrollmentRepository)
+        {
+            _enrollmentRepository = enrollmentRepository;
+        }
+
         // Sample data (you can replace this with your database logic)
         private static List<Enrollment> enrollments = new List<Enrollment>
         {
@@ -17,7 +24,7 @@ namespace EnrollmentManagement.Controllers
 
         public IActionResult Index()
         {
-            // Display a list of enrollments
+            var enrollments = _enrollmentRepository.GetAllEnrollments();
             return View(enrollments);
         }
 
@@ -32,11 +39,14 @@ namespace EnrollmentManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Add the new enrollment to the list (you can replace this with your database logic)
-                enrollment.Id = enrollments.Max(e => e.Id) + 1;
-                enrollments.Add(enrollment);
-
+                _enrollmentRepository.AddEnrollment(enrollment);
                 return RedirectToAction("Index");
+            }
+
+            // Debugging code to log model validation errors
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine($"Model error: {error.ErrorMessage}");
             }
 
             return View(enrollment);
@@ -45,7 +55,7 @@ namespace EnrollmentManagement.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var enrollment = enrollments.FirstOrDefault(e => e.Id == id);
+            var enrollment = _enrollmentRepository.GetEnrollmentById(id);
 
             if (enrollment == null)
             {
@@ -60,18 +70,7 @@ namespace EnrollmentManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingEnrollment = enrollments.FirstOrDefault(e => e.Id == enrollment.Id);
-
-                if (existingEnrollment == null)
-                {
-                    return NotFound();
-                }
-
-                existingEnrollment.StudentId = enrollment.StudentId;
-                existingEnrollment.CourseId = enrollment.CourseId;
-                existingEnrollment.EnrollmentDate = enrollment.EnrollmentDate;
-                existingEnrollment.StatusE = enrollment.StatusE;
-
+                _enrollmentRepository.UpdateEnrollment(enrollment);
                 return RedirectToAction("Index");
             }
 
@@ -81,7 +80,7 @@ namespace EnrollmentManagement.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var enrollment = enrollments.FirstOrDefault(e => e.Id == id);
+            var enrollment = _enrollmentRepository.GetEnrollmentById(id);
 
             if (enrollment == null)
             {
@@ -94,7 +93,7 @@ namespace EnrollmentManagement.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var enrollment = enrollments.FirstOrDefault(e => e.Id == id);
+            var enrollment = _enrollmentRepository.GetEnrollmentById(id);
 
             if (enrollment == null)
             {
@@ -107,13 +106,7 @@ namespace EnrollmentManagement.Controllers
         [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
-            var enrollment = enrollments.FirstOrDefault(e => e.Id == id);
-
-            if (enrollment != null)
-            {
-                enrollments.Remove(enrollment);
-            }
-
+            _enrollmentRepository.DeleteEnrollment(id);
             return RedirectToAction("Index");
         }
     }

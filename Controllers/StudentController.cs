@@ -8,6 +8,13 @@ namespace StudentManagement.Controllers
 {
     public class StudentController : Controller
     {
+        private readonly IStudentRepository _studentRepository;
+
+    public StudentController(IStudentRepository studentRepository)
+    {
+        _studentRepository = studentRepository;
+    }
+
         // Sample data (you can replace this with your database logic)
         private static List<Student> students = new List<Student>
         {
@@ -15,38 +22,51 @@ namespace StudentManagement.Controllers
             new Student { Id = 2, FirstName = "Jane", LastName = "Smith" }
         };
 
+        // GET: /Student/Index
+        [HttpGet]
         public IActionResult Index()
         {
-            // Display a list of students
+            // Retrieve and display a list of students using the repository
+            var students = _studentRepository.GetAllStudents();
             return View(students);
         }
 
+        // GET: /Student/Create
         [HttpGet]
         public IActionResult Create()
         {
+            // Display a form for creating a new student
             return View();
         }
 
+        // POST: /Student/Create
         [HttpPost]
         public IActionResult Create(Student student)
         {
             if (ModelState.IsValid)
             {
-                // Add the new student to the list (you can replace this with your database logic)
-                student.Id = students.Max(s => s.Id) + 1;
-                students.Add(student);
+                // Create a new student using the repository
+                _studentRepository.AddStudent(student);
 
+                // Redirect to the student list
                 return RedirectToAction("Index");
+            }
+
+            // Debugging code to log model validation errors
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine($"Model error: {error.ErrorMessage}");
             }
 
             return View(student);
         }
 
+        // GET: /Student/Edit/1
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var student = students.FirstOrDefault(s => s.Id == id);
-
+            // Retrieve the student by id and display the edit form
+            var student = _studentRepository.GetStudentById(id);
             if (student == null)
             {
                 return NotFound();
@@ -55,32 +75,28 @@ namespace StudentManagement.Controllers
             return View(student);
         }
 
+        // POST: /Student/Edit/1
         [HttpPost]
         public IActionResult Edit(Student student)
         {
             if (ModelState.IsValid)
             {
-                var existingStudent = students.FirstOrDefault(s => s.Id == student.Id);
+                // Update the student with the new model data using the repository
+                _studentRepository.UpdateStudent(student);
 
-                if (existingStudent == null)
-                {
-                    return NotFound();
-                }
-
-                existingStudent.FirstName = student.FirstName;
-                existingStudent.LastName = student.LastName;
-
+                // Redirect to the student list
                 return RedirectToAction("Index");
             }
 
             return View(student);
         }
 
+        // GET: /Student/Details/1
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var student = students.FirstOrDefault(s => s.Id == id);
-
+            // Retrieve and display student details using the repository
+            var student = _studentRepository.GetStudentById(id);
             if (student == null)
             {
                 return NotFound();
@@ -89,11 +105,12 @@ namespace StudentManagement.Controllers
             return View(student);
         }
 
+        // GET: /Student/Delete/1
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var student = students.FirstOrDefault(s => s.Id == id);
-
+            // Retrieve the student by id and display the delete confirmation page
+            var student = _studentRepository.GetStudentById(id);
             if (student == null)
             {
                 return NotFound();
@@ -102,16 +119,14 @@ namespace StudentManagement.Controllers
             return View(student);
         }
 
-        [HttpPost]
+        // POST: /Student/Delete/1
+        [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var student = students.FirstOrDefault(s => s.Id == id);
+            // Delete the student by id using the repository
+            _studentRepository.DeleteStudent(id);
 
-            if (student != null)
-            {
-                students.Remove(student);
-            }
-
+            // Redirect to the student list
             return RedirectToAction("Index");
         }
     }

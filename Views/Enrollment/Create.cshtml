@@ -1,31 +1,31 @@
 @model EnrollmentManagement.Models.Enrollment
 
-<h2>Create Enrollment</h2>
+<h2>Creer Inscription</h2>
 
 <p>
-    <a asp-action="Index">Back to List</a>
+    <a href="@Url.Action("Index")">Retour a la liste</a>
 </p>
 
 <form asp-action="Create">
     <div class="form-group">
-        <label asp-for="StudentId"></label>
+        <label asp-for="StudentId">Etudiant ID</label>
         <input asp-for="StudentId" class="form-control" />
         <span asp-validation-for="StudentId" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="CourseId"></label>
+        <label asp-for="CourseId">Filière ID</label>
         <input asp-for="CourseId" class="form-control" />
         <span asp-validation-for="CourseId" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="EnrollmentDate"></label>
+        <label asp-for="EnrollmentDate">Date Inscription</label>
         <input asp-for="EnrollmentDate" class="form-control" />
         <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="StatusE"></label>
+        <label asp-for="StatusE">Status Inscription</label>
         <input asp-for="StatusE" class="form-control" />
         <span asp-validation-for="StatusE" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary">Creer</button>
 </form>

@@ -1,87 +1,131 @@
 using Microsoft.AspNetCore.Mvc;
-using CourseManagement.Models; // Make sure to include your model namespace
+using CourseManagement.Models;
+using System;
+using System.Collections.Generic;
 
-public class CourseController : Controller
+namespace CourseManagement.Controllers
 {
-    private readonly ICourseRepository _courseRepository;
+    public class CourseController : Controller
+    {
+        private readonly ICourseRepository _courseRepository;
 
-    public CourseController(ICourseRepository courseRepository)
-    {
-        _courseRepository = courseRepository;
-    }
-    
-    // GET: /Course/Index
-    [HttpGet]
-    public IActionResult Index()
-    {
-        // Logic to retrieve and display a list of courses
-        var courses = _courseRepository.GetAllCourses();
-        return View(courses);
-        return View();
-    }
+        public CourseController(ICourseRepository courseRepository)
+        {
+            _courseRepository = courseRepository;
+        }
 
-    // GET: /Course/Create
-    [HttpGet]
-    public IActionResult Create()
-    {
-        // Logic to display a form for creating a new course
-        return View();
-    }
+        private static List<Course> courses = new List<Course>
+        {
+            new Course { Id = 1, Title = "Genie Logiciel", Description = "Developement & Technologie Web", StatusC = "Ouvert" },
+            new Course { Id = 2, Title = "Business", Description = "Marketing Digital", StatusC = "Fermer" },
+        };
 
-    // POST: /Course/Create
-    [HttpPost]
-    public IActionResult Create(Course model)
-    {
-        // Logic to create a new course
-        // Example: _courseRepository.CreateCourse(model);
-        return RedirectToAction("Index");
-    }
+        // GET: /Course/Index
+        [HttpGet]
+        public IActionResult Index()
+        {
+            // Retrieve and display a list of courses
+            var courses = _courseRepository.GetAllCourses();
+            return View(courses);
+        }
 
-    // GET: /Course/Edit/1
-    [HttpGet]
-    public IActionResult Edit(int id)
-    {
-        // Logic to retrieve the course by id and display the edit form
-        // Example: var course = _courseRepository.GetCourseById(id);
-        // return View(course);
-        return View();
-    }
+        // GET: /Course/Create
+        [HttpGet]
+        public IActionResult Create()
+        {
+            // Display a form for creating a new course
+            return View();
+        }
 
-    // POST: /Course/Edit/1
-    [HttpPost]
-    public IActionResult Edit(int id, Course model)
-    {
-        // Logic to update the course with the new model data
-        // Example: _courseRepository.UpdateCourse(id, model);
-        return RedirectToAction("Index");
-    }
+        // POST: /Course/Create
+        [HttpPost]
+        public IActionResult Create(Course course)
+        {
+            if (ModelState.IsValid)
+            {
+                // Create a new course
+                _courseRepository.AddCourse(course);
 
-    // GET: /Course/Details/1
-    [HttpGet]
-    public IActionResult Details(int id)
-    {
-        // Logic to retrieve and display course details
-        // Example: var course = _courseRepository.GetCourseById(id);
-        // return View(course);
-        return View();
-    }
+                // Redirect to the course list
+                return RedirectToAction("Index");
+            }
 
-    // GET: /Course/Delete/1
-    [HttpGet]
-    public IActionResult Delete(int id)
-    {
-        // Logic to retrieve the course by id and display the delete confirmation page
-        // Example: var course = _courseRepository.GetCourseById(id);
-        // return View(course);
-        return View();
-    }
+            // Debugging code to log model validation errors
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine($"Model error: {error.ErrorMessage}");
+            }
 
-    // POST: /Course/Delete/1
-    [HttpPost, ActionName("Delete")]
-    public IActionResult DeleteConfirmed(int id)
-    {
-        // Logic to delete the course by id
-        // Example: _courseRepository.DeleteCourse(id);
-        return RedirectToAction("Index");
+            return View(course);
+        }
+
+        // GET: /Course/Edit/1
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            // Retrieve the course by id and display the edit form
+            var course = _courseRepository.GetCourseById(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return View(course);
+        }
+
+        // POST: /Course/Edit/1
+        [HttpPost]
+        public IActionResult Edit(Course course)
+        {
+            if (ModelState.IsValid)
+            {
+                // Update the course with the new model data
+                _courseRepository.UpdateCourse(course);
+
+                // Redirect to the course list
+                return RedirectToAction("Index");
+            }
+
+            return View(course);
+        }
+
+        // GET: /Course/Details/1
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            // Retrieve and display course details
+            var course = _courseRepository.GetCourseById(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return View(course);
+        }
+
+        // GET: /Course/Delete/1
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            // Retrieve the course by id and display the delete confirmation page
+            var course = _courseRepository.GetCourseById(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return View(course);
+        }
+
+        // POST: /Course/Delete/1
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            // Delete the course by id
+            _courseRepository.DeleteCourse(id);
+
+            // Redirect to the course list
+            return RedirectToAction("Index");
+        }
     }
 }

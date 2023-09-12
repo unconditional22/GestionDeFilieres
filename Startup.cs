@@ -50,6 +50,8 @@ namespace CourseManagementSystem
             });
 
             services.AddScoped<ICourseRepository, CourseRepository>(); // Register your ICourseRepository here
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
 
             services.AddRazorPages();
         }
