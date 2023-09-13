@@ -1,0 +1,30 @@
+@model ALoginViewModel.Models.ViewModels.RegisterViewModel
+@using CourseManagementSystem.Data
+
+<div class="register-container" style="background-color: #fff; border-radius: 5px; padding: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); text-align: center;">
+    <h2>Register</h2>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "register-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            @Html.LabelFor(m => m.Username)
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Username)
+        </div>
+
+        <div class="form-group" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+
+        <div class="form-group" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            @Html.LabelFor(m => m.ConfirmPassword)
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="display: block; margin: auto;">Register</button>
+    }
+</div>

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging; // Add this namespace
+using Microsoft.Extensions.Logging; 
 using ALoginViewModel.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
@@ -11,17 +11,54 @@ namespace AccountController.Controllers
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<AccountController> _logger; // Add this field
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AccountController(SignInManager<IdentityUser> signInManager, ILogger<AccountController> logger)
+        public AccountController(SignInManager<IdentityUser> signInManager, ILogger<AccountController> logger, UserManager<IdentityUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManager = userManager; 
         }
 
         [HttpGet]
         public IActionResult Login()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUser { UserName = model.Username };
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User created successfully.");
+                    await _userManager.AddToRoleAsync(user, "Administrator"); // Assign the Administrator role to the user
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    _logger.LogError("User creation failed.");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return View(model);
         }
 
         [HttpPost]
