@@ -1,39 +1,33 @@
 @model IEnumerable<StudentManagement.Models.Student>
 
-<h2>Étudiants - Index</h2>
+<div style="max-width: 960px; margin: 0 auto; background-color: #fff; padding: 20px;">
+    <h2 style="margin-bottom: 20px;">Étudiants - Index</h2>
 
-<p>
-    <a href="@Url.Action("Create")">Creer Nouveau Étudiant</a>
-</p>
+    <div style="margin-bottom: 20px;">
+        <a href="@Url.Action("Create")" style="background-color: #007bff; border-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 4px; text-decoration: none;">Créer Nouveau Étudiant</a>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Détails</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
-                </td>
+                <th style="padding: 10px; border: 1px solid #dee2e6;">Prenom</th>
+                <th style="padding: 10px; border: 1px solid #dee2e6;">Nom</th>
+                <th style="padding: 10px; border: 1px solid #dee2e6;"></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #dee2e6;">@Html.DisplayFor(modelItem => item.FirstName)</td>
+                    <td style="padding: 10px; border: 1px solid #dee2e6;">@Html.DisplayFor(modelItem => item.LastName)</td>
+                    <td style="padding: 10px; border: 1px solid #dee2e6;">
+                        <a href="@Url.Action("Edit", new { id = item.Id })" style="background-color: #ffc107; border-color: #ffc107; color: #fff; padding: 5px 10px; border-radius: 4px; text-decoration: none; margin-right: 10px;">Modifier</a>
+                        <a href="@Url.Action("Details", new { id = item.Id })" style="background-color: #17a2b8; border-color: #17a2b8; color: #fff; padding: 5px 10px; border-radius: 4px; text-decoration: none; margin-right: 10px;">Détails</a>
+                        <a href="@Url.Action("Delete", new { id = item.Id })" style="background-color: #dc3545; border-color: #dc3545; color: #fff; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Supprimer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

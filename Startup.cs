@@ -49,9 +49,9 @@ namespace CourseManagementSystem
                 options.AccessDeniedPath = "/Account/AccessDenied"; // Customize your access denied route
             });
 
-            services.AddScoped<ICourseRepository, CourseRepository>(); // Register your ICourseRepository here
-            services.AddScoped<IStudentRepository, StudentRepository>();
-            services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
+            services.AddScoped<ICourseRepository, SampleCourseRepository>(); // CourseRepository; Register your ICourseRepository here
+            services.AddScoped<IStudentRepository, SampleStudentRepository>(); //StudentRepository = for database
+            services.AddScoped<IEnrollmentRepository,SampleEnrollmentRepository >(); // EnrollmentRepository
 
             services.AddRazorPages();
         }
@@ -80,12 +80,28 @@ namespace CourseManagementSystem
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-            });
+        {
+            endpoints.MapControllerRoute(
+                name: "student_edit",
+                pattern: "Student/Edit/{id}",
+                defaults: new { controller = "Student", action = "Edit" });
+
+            endpoints.MapControllerRoute(
+                name: "student_delete",
+                pattern: "Student/Delete/{id}",
+                defaults: new { controller = "Student", action = "Delete" });
+
+            endpoints.MapControllerRoute(
+                name: "student_details",
+                pattern: "Student/Details/{id}",
+                defaults: new { controller = "Student", action = "Details" });
+
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            endpoints.MapRazorPages();
+        });
         }
     }
 }

@@ -1,20 +1,30 @@
 @model CourseManagement.Models.Course
 
-<h2>Détails Filière</h2>
+<div style="max-width: 960px; margin: 0 auto;">
+    <h2 style="margin-bottom: 20px;">Détails Filière</h2>
 
-<div>
-    <h4>Information Filière</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">Titre :</dt>
-        <dd class="col-sm-10">@Model.Title</dd>
-        <dt class="col-sm-2">Description :</dt>
-        <dd class="col-sm-10">@Model.Description</dd>
-        <dt class="col-sm-2">Status Filière :</dt>
-        <dd class="col-sm-10">@Model.StatusC</dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Modifier</a>
-    <a asp-action="Index" class="btn btn-secondary">Retour a la liste</a>
+    <div>
+        <h4>Information Filière</h4>
+        <hr />
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th scope="row">Titre :</th>
+                    <td>@Model.Title</td>
+                </tr>
+                <tr>
+                    <th scope="row">Description :</th>
+                    <td>@Model.Description</td>
+                </tr>
+                <tr>
+                    <th scope="row">Status Filière :</th>
+                    <td>@Model.StatusC</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <a href='@Url.Action("Edit", new { id = Model.Id })' class="btn btn-primary" style="margin-right: 10px;">Modifier</a>
+        <a href='@Url.Action("Index")' class="btn btn-secondary">Retour à la liste</a>
+    </div>
 </div>

@@ -14,11 +14,11 @@ namespace CourseManagement.Controllers
             _courseRepository = courseRepository;
         }
 
-        private static List<Course> courses = new List<Course>
-        {
-            new Course { Id = 1, Title = "Genie Logiciel", Description = "Developement & Technologie Web", StatusC = "Ouvert" },
-            new Course { Id = 2, Title = "Business", Description = "Marketing Digital", StatusC = "Fermer" },
-        };
+        // private static List<Course> courses = new List<Course>
+        // {
+        //     new Course { Id = 1, Title = "Genie Logiciel", Description = "Developement & Technologie Web", StatusC = "Ouvert" },
+        //     new Course { Id = 2, Title = "Business", Description = "Marketing Digital", StatusC = "Fermer" },
+        // };
 
         // GET: /Course/Index
         [HttpGet]

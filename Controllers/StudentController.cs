@@ -16,11 +16,11 @@ namespace StudentManagement.Controllers
     }
 
         // Sample data (you can replace this with your database logic)
-        private static List<Student> students = new List<Student>
-        {
-            new Student { Id = 1, FirstName = "John", LastName = "Doe" },
-            new Student { Id = 2, FirstName = "Jane", LastName = "Smith" }
-        };
+        // private static List<Student> students = new List<Student>
+        // {
+        //     new Student { Id = 1, FirstName = "John", LastName = "Doe" },
+        //     new Student { Id = 2, FirstName = "Jane", LastName = "Smith" }
+        // };
 
         // GET: /Student/Index
         [HttpGet]

@@ -1,27 +1,29 @@
 @model EnrollmentManagement.Models.Enrollment
 
-<h2>Modifier Inscription</h2>
+<div style="max-width: 960px; margin: 0 auto;">
+    <h2 style="margin-bottom: 20px;">Modifier Inscription</h2>
 
-<form asp-action="Edit" asp-route-id="@Model.Id">
-    <div class="form-group">
-        <label asp-for="StudentId">Etudiant ID</label>
-        <input asp-for="StudentId" class="form-control" />
-        <span asp-validation-for="StudentId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CourseId">Filière ID</label>
-        <input asp-for="CourseId" class="form-control" />
-        <span asp-validation-for="CourseId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="EnrollmentDate">Date Inscription</label>
-        <input asp-for="EnrollmentDate" class="form-control" />
-        <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StatusE">Status Inscription</label>
-        <input asp-for="StatusE" class="form-control" />
-        <span asp-validation-for="StatusE" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Sauvegarder</button>
-</form>
+    <form asp-action="Edit" asp-route-id="@Model.Id">
+        <div class="form-group">
+            <label asp-for="StudentId" style="margin-bottom: 5px;">Etudiant ID : </label>
+            <input asp-for="StudentId" class="form-control" />
+            <span asp-validation-for="StudentId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CourseId" style="margin-bottom: 5px;">Filière ID : </label>
+            <input asp-for="CourseId" class="form-control" />
+            <span asp-validation-for="CourseId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EnrollmentDate" style="margin-bottom: 5px;">Date Inscription : </label>
+            <input asp-for="EnrollmentDate" class="form-control" />
+            <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StatusE" style="margin-bottom: 5px;">Status Inscription : </label>
+            <input asp-for="StatusE" class="form-control" />
+            <span asp-validation-for="StatusE" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Sauvegarder</button>
+    </form>
+</div>

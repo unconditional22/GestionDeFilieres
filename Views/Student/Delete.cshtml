@@ -1,12 +1,14 @@
 @model StudentManagement.Models.Student
 
-<h2>Supprimer Étudiant</h2>
+<div style="max-width: 960px; margin: 0 auto;">
+    <h2 style="margin-bottom: 20px;">Supprimer Étudiant</h2>
 
-<form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
-    <div class="form-group">
-        <p>Êtes-vous sûr de vouloir supprimer cet étudiant ?</p>
-        <p><strong>@Model.FirstName @Model.LastName</strong></p>
-    </div>
-    <button type="submit" class="btn btn-danger">Supprimer</button>
-    <a asp-action="Index" class="btn btn-secondary">Annuler</a>
-</form>
+    <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
+        <div class="form-group">
+            <p>Êtes-vous sûr de vouloir supprimer cet étudiant ?</p>
+            <p><strong>@Model.FirstName @Model.LastName</strong></p>
+        </div>
+        <button type="submit" class="btn btn-danger" style="margin-right: 10px;">Supprimer</button>
+        <a href='@Url.Action("Index")' class="btn btn-secondary">Annuler</a>
+    </form>
+</div>

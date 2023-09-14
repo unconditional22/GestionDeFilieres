@@ -16,11 +16,11 @@ namespace EnrollmentManagement.Controllers
         }
 
         // Sample data (you can replace this with your database logic)
-        private static List<Enrollment> enrollments = new List<Enrollment>
-        {
-            new Enrollment { Id = 1, StudentId = 1, CourseId = 1, EnrollmentDate = DateTime.Now, StatusE = "Active" },
-            new Enrollment { Id = 2, StudentId = 2, CourseId = 2, EnrollmentDate = DateTime.Now, StatusE = "Complete" }
-        };
+        // private static List<Enrollment> enrollments = new List<Enrollment>
+        // {
+        //     new Enrollment { Id = 1, StudentId = 1, CourseId = 1, EnrollmentDate = DateTime.Now, StatusE = "Active" },
+        //     new Enrollment { Id = 2, StudentId = 2, CourseId = 2, EnrollmentDate = DateTime.Now, StatusE = "Complete" }
+        // };
 
         public IActionResult Index()
         {

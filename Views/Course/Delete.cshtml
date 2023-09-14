@@ -1,12 +1,14 @@
 @model CourseManagement.Models.Course
 
-<h2>Supprimer Filière</h2>
+<div style="max-width: 960px; margin: 0 auto;">
+    <h2 style="margin-bottom: 20px;">Supprimer Filière</h2>
 
-<form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
-    <div class="form-group">
-        <p>Êtes-vous sûr de vouloir supprimer cette filière?</p>
-        <p><strong>@Model.Title</strong></p>
-    </div>
-    <button type="submit" class="btn btn-danger">Supprimer</button>
-    <a asp-action="Index" class="btn btn-secondary">Annuler</a>
-</form>
+    <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
+        <div class="form-group">
+            <p>Êtes-vous sûr de vouloir supprimer cette filière?</p>
+            <p><strong>@Model.Title</strong></p>
+        </div>
+        <button type="submit" class="btn btn-danger" style="margin-right: 10px;">Supprimer</button>
+        <a href='@Url.Action("Index")' class="btn btn-secondary">Annuler</a>
+    </form>
+</div>

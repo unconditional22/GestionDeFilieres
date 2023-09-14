@@ -14,27 +14,28 @@ namespace CourseManagementSystem.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+            
             //Initialize DbSet properties using AddRange
 
-            //Initialize Courses using AddRange
-            if (Courses != null)
-            {
-                Courses.AddRange(new Course[]
-                {
-                    new Course { Title = "Genie Logiciel", Description = "Developement & Technologie Web", StatusC = "Ouvert" },
-                    new Course { Title = "Business", Description = "Marketing Digital", StatusC = "Fermer" }
-                });
-            }
+            // //Initialize Courses using AddRange
+            // if (Courses != null)
+            // {
+            //     Courses.AddRange(new Course[]
+            //     {
+            //         new Course { Title = "Genie Logiciel", Description = "Developement & Technologie Web", StatusC = "Ouvert" },
+            //         new Course { Title = "Business", Description = "Marketing Digital", StatusC = "Fermer" }
+            //     });
+            // }
 
-            // Initialize Students using AddRange
-            if (Students != null)
-            {
-                Students.AddRange(new Student[]
-                {
-                    new Student { FirstName = "John", LastName = "Doe" },
-                    new Student { FirstName = "Jane", LastName = "Smith" }
-                });
-            }
+            // // Initialize Students using AddRange
+            // if (Students != null)
+            // {
+            //     Students.AddRange(new Student[]
+            //     {
+            //         new Student { FirstName = "John", LastName = "Doe" },
+            //         new Student { FirstName = "Jane", LastName = "Smith" }
+            //     });
+            // }
 
             // Initialize Enrollments using AddRange
             // if (Enrollments != null)

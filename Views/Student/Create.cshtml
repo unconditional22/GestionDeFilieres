@@ -1,21 +1,23 @@
 @model StudentManagement.Models.Student
 
-<h2>Creer Étudiant</h2>
+<div style="max-width: 960px; margin: 0 auto;">
+    <h2 style="margin-bottom: 20px;">Creer Étudiant</h2>
 
-<p>
-    <a href="@Url.Action("Index")">Retour a la liste</a>
-</p>
+    <p>
+        <a href="@Url.Action("Index")" style="color: #007bff; text-decoration: none;">Retour a la liste</a>
+    </p>
 
-<form asp-action="Create">
-    <div class="form-group">
-        <label asp-for="FirstName">Prenom : </label>
-        <input asp-for="FirstName" class="form-control" />
-        <span asp-validation-for="FirstName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="LastName">Nom : </label>
-        <input asp-for="LastName" class="form-control" />
-        <span asp-validation-for="LastName" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Creer</button>
-</form>
+    <form asp-action="Create">
+        <div class="form-group">
+            <label asp-for="FirstName" style="margin-bottom: 5px;">Prenom :</label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName" style="margin-bottom: 5px;">Nom :</label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Creer</button>
+    </form>
+</div>
